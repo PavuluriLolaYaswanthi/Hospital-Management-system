@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Prescription</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Submit Prescription</h1>
+    <form action="{{ url_for('main.submit_prescription') }}" method="POST">
+        <label for="doctor_id">Doctor ID:</label>
+        <input type="number" name="doctor_id" required>
+
+        <label for="patient_id">Patient ID:</label>
+        <input type="number" name="patient_id" required>
+
+        <label for="medicines">Medicines:</label>
+        <textarea name="medicines" rows="4" required></textarea>
+
+        <label for="instructions">Instructions:</label>
+        <textarea name="instructions" rows="4" required></textarea>
+
+        <button type="submit">Submit Prescription</button>
+    </form>
+</body>
+</html>

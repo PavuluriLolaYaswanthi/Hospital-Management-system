@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+</head>
+<body>
+    <h1>Edit User</h1>
+    <form method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ user[1] }}" required>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ user[2] }}" required>
+        <br><br>
+
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="admin" {% if user[5] == 'admin' %} selected {% endif %}>Admin</option>
+            <option value="doctor" {% if user[5] == 'doctor' %} selected {% endif %}>Doctor</option>
+            <option value="patient" {% if user[5] == 'patient' %} selected {% endif %}>Patient</option>
+            <option value="nurse" {% if user[5] == 'nurse' %} selected {% endif %}>Nurse</option>
+            <option value="ambulance" {% if user[5] == 'ambulance' %} selected {% endif %}>Ambulance</option>
+            <option value="medical_store" {% if user[5] == 'medical_store' %} selected {% endif %}>Medical Store</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Reminders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Appointment Reminders</h1>
+
+    {% if reminders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Appointment ID</th>
+                    <th>Date</th>
+                    <th>Doctor</th>
+                    <th>Reminder</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reminder in reminders %}
+                <tr>
+                    <td>{{ reminder[0] }}</td>
+                    <td>{{ reminder[1] }}</td>
+                    <td>{{ reminder[2] }}</td>
+                    <td>{{ reminder[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No appointment reminders available.</p>
+    {% endif %}
+</body>
+</html>

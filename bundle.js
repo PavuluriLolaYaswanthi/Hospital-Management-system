@@ -1,0 +1,1 @@
+// document.addEventListener("DOMContentLoaded",(function(){const e=document.getElementById("hospital-image"),o=document.getElementById("welcome-message");e.addEventListener("click",(function(){document.body.classList.add("show-message"),o.style.display="block"}))})),console.log("Hospital Management System Home Page"),console.log("Login page loaded.");

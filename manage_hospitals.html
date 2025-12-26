@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Hospitals</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Hospitals</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Services</th>
+                <th>Rating</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hospital in hospitals %}
+            <tr>
+                <td>{{ hospital[0] }}</td>  <!-- Hospital ID -->
+                <td>{{ hospital[1] }}</td>  <!-- Hospital Name -->
+                <td>{{ hospital[2] }}</td>  <!-- Location -->
+                <td>{{ hospital[3] }}</td>  <!-- Services -->
+                <td>{{ hospital[4] }}</td>  <!-- Rating -->
+                <td>
+                    <a href="{{ url_for('main.edit_hospital', hospital_id=hospital[0]) }}">Edit</a> |
+                    <a href="{{ url_for('main.delete_hospital', hospital_id=hospital[0]) }}" onclick="return confirm('Are you sure you want to delete this hospital?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

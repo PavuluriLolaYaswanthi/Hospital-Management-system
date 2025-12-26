@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Hospital Management System</title>
+    <style>
+        /* General body styling with animated gradient background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc, #b721ff, #21d4fd);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background gradient animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Main container with glow effect */
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s;
+            z-index: 1;
+        }
+
+        /* Hover effect for container */
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffdfba; /* Soft, complementary color */
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 1.3rem;
+            margin: 10px 0;
+            color: #eee;
+        }
+
+        /* Login prompt with soft glow */
+        .login-prompt {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 12px 18px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 20px;
+            color: #fff;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .login-prompt:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Link styling */
+        a {
+            color: #21d4fd;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #ffdfba;
+        }
+
+        /* Button styling with hover scale effect */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #ffb6c1;
+            color: #333;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.4);
+        }
+
+        .button:hover {
+            background-color: #ffdfba;
+            transform: scale(1.05);
+        }
+
+        /* Decorative animated circles */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 3s;
+        }
+
+        /* Floating animation for circles */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="container">
+        <h1>Welcome to the Hospital Management System</h1>
+        {% if current_user.is_authenticated %}
+            <p>Thank you for being a part of our healthcare community!</p>
+            <p><a class="button" href="{{ url_for('main.logout') }}">Logout</a></p>
+        {% else %}
+            <div class="login-prompt">
+                Please <a href="{{ url_for('main.login') }}">log in</a> to access your dashboard.
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Hospital Management System</title>
+    <style>
+        /* Animated gradient background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc, #b721ff, #21d4fd);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Gradient animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container with glow and shadow */
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(106, 17, 203, 0.5);
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        /* Container hover effect */
+        .login-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #ffdfba;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Label styling */
+        label {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+
+        /* Input field styling */
+        input[type="text"], input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            color: #eee;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        input:focus {
+            border-color: #ffdfba;
+            box-shadow: 0 0 10px rgba(255, 223, 186, 0.5);
+        }
+
+        /* Show/hide password toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 30px;
+            cursor: pointer;
+            color: #ffdfba;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #6a11cb;
+        }
+
+        /* Button styling with scale effect */
+        button {
+            background: linear-gradient(135deg, #ffdfba 0%, #6a11cb 100%);
+            color: #333;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 223, 186, 0.4);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #6a11cb 0%, #ffdfba 100%);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 223, 186, 0.6);
+        }
+
+        /* Flash error message */
+        .flash-error {
+            background-color: #e74c3c;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Additional links styling */
+        p {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Links styling */
+        a {
+            color: #ffdfba;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6a11cb;
+            text-decoration: underline;
+        }
+
+        /* Floating particles animation */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 5s infinite ease-in-out;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        .particle-1 { width: 8px; height: 8px; top: 20%; left: 10%; animation-duration: 6s; }
+        .particle-2 { width: 12px; height: 12px; top: 40%; right: 10%; animation-duration: 8s; }
+        .particle-3 { width: 10px; height: 10px; bottom: 20%; left: 40%; animation-duration: 5s; }
+
+        /* Float animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        /* Updated password toggle styling */
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 50%; /* Center it vertically */
+            transform: translateY(-50%); /* Center it vertically within the input */
+            cursor: pointer;
+            color: #6a11cb; /* Icon color */
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #2575fc;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+
+    <div class="login-container">
+        <h1>Login</h1>
+
+        <!-- Flash messages for errors -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('main.login') }}">
+            {{ form.hidden_tag() }} <!-- CSRF protection -->
+
+            <label for="username">Username:</label>
+            {{ form.username(size=32) }}
+
+            <label for="password">Password:</label>
+            <div style="position: relative;">
+                {{ form.password(size=32, id="passwordField") }}
+                <span class="password-toggle" onclick="togglePassword()">👁️</span>
+            </div>
+
+            <label for="role">Role:</label>
+            {{ form.role() }}
+
+            <label for="state">State:</label>
+            <select name="state" id="state" required>
+                <option value="">Select State</option>
+            </select>
+
+            <label for="city">City:</label>
+            <select name="city" id="city" required>
+                <option value="">Select City</option>
+            </select>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Links for Forgot Password and Register -->
+        <p><a href="{{ url_for('main.forgot_password') }}">Forgot Password?</a></p>
+        <p><a href="{{ url_for('main.forgot_username') }}">Forgot Username?</a></p>
+        <p>Don't have an account? <a href="{{ url_for('main.register') }}">Register here</a></p>
+    </div>
+
+    <script>
+        // Password toggle function
+        function togglePassword() {
+            const passwordField = document.getElementById('passwordField');
+            const toggleIcon = document.querySelector('.password-toggle');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+
+        // State and City Dropdowns
+        const locationData = {
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Kadapa", "Kurnool", "Nellore", "Tirupati"],
+            "Arunachal Pradesh": ["Itanagar", "Tawang", "Pasighat"],
+            "Assam": ["Guwahati", "Dibrugarh", "Silchar"],
+            "Bihar": ["Patna", "Gaya", "Bhagalpur"],
+            "Chhattisgarh": ["Raipur", "Bilaspur", "Korba"],
+            "Goa": ["Panaji", "Margao", "Vasco da Gama"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+            "Haryana": ["Gurgaon", "Faridabad", "Panchkula"],
+            "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala"],
+            "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad"],
+            "Karnataka": ["Bangalore", "Mysore", "Hubli"],
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+            "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Manipur": ["Imphal", "Churachandpur", "Thoubal"],
+            "Meghalaya": ["Shillong", "Tura", "Jowai"],
+            "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
+            "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela"],
+            "Punjab": ["Chandigarh", "Ludhiana", "Amritsar"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur"],
+            "Sikkim": ["Gangtok", "Namchi", "Pelling"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Telangana": ["Hyderabad", "Warangal", "Nizamabad"],
+            "Tripura": ["Agartala", "Udaipur", "Dharmanagar"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra"],
+            "Uttarakhand": ["Dehradun", "Haridwar", "Nainital"],
+            "West Bengal": ["Kolkata", "Darjeeling", "Howrah"]
+        };
+
+        window.onload = () => {
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+
+            for (const state in locationData) {
+                stateSelect.innerHTML += `<option value="${state}">${state}</option>`;
+            }
+
+            stateSelect.addEventListener('change', () => {
+                citySelect.innerHTML = '<option value="">Select City</option>';
+                if (locationData[stateSelect.value]) {
+                    locationData[stateSelect.value].forEach(city => {
+                        citySelect.innerHTML += `<option value="${city}">${city}</option>`;
+                    });
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

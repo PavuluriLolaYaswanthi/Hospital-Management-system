@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Resource</title>
+</head>
+<body>
+    <h1>Update Resource Allocation</h1>
+    <form method="POST">
+        <label for="allocation_status">Allocation Status:</label>
+        <select id="allocation_status" name="allocation_status">
+            <option value="Available" {% if resource[3] == 'Available' %} selected {% endif %}>Available</option>
+            <option value="In Use" {% if resource[3] == 'In Use' %} selected {% endif %}>In Use</option>
+            <option value="Allocated" {% if resource[3] == 'Allocated' %} selected {% endif %}>Allocated</option>
+        </select>
+        <br><br>
+        <button type="submit">Update Status</button>
+    </form>
+</body>
+</html>

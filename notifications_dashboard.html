@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        li:hover {
+            background-color: #0056b3;
+        }
+
+        li span {
+            font-weight: bold;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: block;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            li {
+                font-size: 1rem;
+            }
+
+            .back-button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notifications</h1>
+        {% if notifications %}
+        <ul>
+            {% for notification in notifications %}
+            <li>
+                <span>{{ notification[1] }}</span> <!-- Assuming notification message is the second column -->
+                <small>{{ notification[2] }}</small> <!-- Assuming notification timestamp is the third column -->
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No notifications available.</p>
+        {% endif %}
+        <a href="{{ url_for('main.patient_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

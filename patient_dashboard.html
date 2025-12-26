@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background: linear-gradient(135deg, #343a40, #495057);
+            width: 250px;
+            height: 100%;
+            padding: 30px 15px;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h1 {
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .sidebar .nav-item {
+            background-color: #495057;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+
+        .sidebar .nav-item:hover {
+            background-color: #6c757d;
+            transform: translateY(-3px);
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+        }
+
+        /* Content Styling */
+        .content {
+            flex-grow: 1;
+            background-color: #e9ecef;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        .content .section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content .section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .content .section p {
+            font-size: 16px;
+            color: #6c757d;
+        }
+
+        .content .section a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .content .section a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #868e96;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .content h1 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 180px;
+                padding: 20px 10px;
+            }
+
+            .sidebar h1 {
+                font-size: 22px;
+            }
+
+            .content h1 {
+                font-size: 24px;
+            }
+
+            .content .section h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h1>Patient Dashboard</h1>
+        <div class="nav-item">
+            <a href="{{ url_for('main.patient_records') }}"><i class="fas fa-notes-medical"></i> Patient Records</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('main.profile_management') }}"><i class="fas fa-user"></i> Profile Management</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('main.book_appointment') }}"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('main.book_ambulance') }}"><i class="fas fa-ambulance"></i> Book Ambulance</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('main.notifications') }}"><i class="fas fa-bell"></i> Notifications</a>
+        </div>
+    </div>
+    
+
+    <div class="content">
+        <h1>Welcome, Patient!</h1>
+        <div class="section">
+            <h2>Manage Your Health</h2>
+            <p>Access and manage your medical records, book appointments, and stay updated with your health journey.</p>
+            <a href="{{ url_for('main.patient_records') }}">View Patient Records</a>
+        </div>
+        <div class="section">
+            <h2>Prescriptions & Orders</h2>
+            <p>Access your prescriptions, order medicines, and manage all your medical needs.</p>
+            <a href="{{ url_for('main.view_prescriptions', patient_id=current_user.id) }}">View Prescriptions</a>
+        </div>
+
+        <div class="section">
+            <h2>Stay Informed</h2>
+            <p>Stay updated with the latest notifications and alerts for your appointments and medications.</p>
+            <a href="{{ url_for('main.notifications') }}">View Notifications</a>
+        </div>
+        <div class="section">
+            <h2>Hospital Services</h2>
+            <p>Search for hospitals and services available in your city or state.</p>
+            <label for="state">State:</label>
+            <input type="text" id="state" placeholder="Enter State">
+            <button onclick="searchHospitals()">Search Hospitals</button>
+
+            <div id="hospital-section" style="display: none; margin-top: 20px;">
+                <h3>Hospitals in the Selected State</h3>
+                <ul id="hospital-list"></ul>
+
+                <h3>Available Services</h3>
+                <ul id="service-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hardcoded data for hospitals and services in 28 states of India
+        const hospitalData = {
+            "Andhra Pradesh": [
+                { name: "Apollo Hospital, Hyderabad", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "Care Hospital", services: ["Oncology", "General Surgery", "Pediatrics"] },
+                { name: "Kamineni Hospital", services: ["Cardiology", "ENT", "Gastroenterology"] }
+            ],
+            "Arunachal Pradesh": [
+                { name: "Heema Hospital", services: ["Orthopedics", "Dermatology", "Pediatrics"] },
+                { name: "RKM Hospital", services: ["ENT", "Gastroenterology", "Urology"] },
+                { name: "Tomology Hospital", services: ["Cardiology", "Neurology", "Orthopedics"] }
+            ],
+            "Assam": [
+                { name: "Gauhati Medical College", services: ["Cardiology", "Orthopedics", "Gastroenterology"] },
+                { name: "Apollo Excelcare Hospital", services: ["Oncology", "General Surgery", "Pediatrics"] },
+                { name: "Down Town Hospital", services: ["Cardiology", "ENT", "Nephrology"] }
+            ],
+            "Uttar Pradesh": [
+                { id: 15, name: "SGPGI Hospital", services: ["Nephrology", "Oncology", "Orthopedics"] },
+                { id: 16, name: "Fortis Noida", services: ["Cardiology", "Pediatrics", "General Surgery"] }
+            ],
+            "Kerala": [
+                { id: 13, name: "Aster Medcity", services: ["Cardiology", "Neurology", "Gastroenterology"] },
+                { id: 14, name: "Amrita Hospital", services: ["Orthopedics", "Oncology", "ENT"] }
+            ],
+            "Bihar": [
+                { name: "IGIMS", services: ["Orthopedics", "Dermatology", "Nephrology"] },
+                { name: "Patna Medical College", services: ["Cardiology", "General Surgery", "Gastroenterology"] },
+                { name: "Paras HMRI Hospital", services: ["Neurology", "Orthopedics", "ENT"] }
+            ],
+            "Chhattisgarh": [
+                { name: "Dr. BR Ambedkar Memorial Hospital", services: ["Orthopedics", "General Surgery", "Pediatrics"] },
+                { name: "Sparsh Hospital", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "Apollo Hospital, Raipur", services: ["Cardiology", "ENT", "Oncology"] }
+            ],
+            "Goa": [
+                { name: "Manipal Hospital, Goa", services: ["Orthopedics", "General Surgery", "Neurology"] },
+                { name: "Victor Hospital", services: ["Cardiology", "Pediatrics", "ENT"] },
+                { name: "Apollo Victor Hospital", services: ["Oncology", "Gastroenterology", "Orthopedics"] }
+            ],
+            "Gujarat": [
+                { name: "Sterling Hospital", services: ["Cardiology", "Orthopedics", "Dermatology"] },
+                { name: "Zydus Hospital", services: ["Oncology", "Neurology", "Urology"] },
+                { name: "CIMS Hospital", services: ["Orthopedics", "Cardiology", "Nephrology"] }
+            ],
+            "Haryana": [
+                { name: "Medanta", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "Fortis Memorial", services: ["Dermatology", "Oncology", "Pediatrics"] },
+                { name: "Paras Hospital", services: ["ENT", "Orthopedics", "General Surgery"] }
+            ],
+            "West Bengal": [
+                { id: 9, name: "Woodlands Hospital", services: ["Cardiology", "Orthopedics", "ENT"] },
+                { id: 10, name: "AMRI Hospital", services: ["Gastroenterology", "Neurology", "Nephrology"] }
+            ],
+            "Himachal Pradesh": [
+                { name: "IGMC Shimla", services: ["Orthopedics", "Dermatology", "Pediatrics"] },
+                { name: "Ner Chowk Medical College", services: ["Oncology", "Cardiology", "Neurology"] },
+                { name: "KNS Hospital", services: ["General Surgery", "ENT", "Orthopedics"] }
+            ],
+            "Mumbai": [
+                { id: 5, name: "Lilavati Hospital", services: ["Cardiology", "Pediatrics", "Orthopedics"] },
+                { id: 6, name: "Kokilaben Dhirubhai Ambani Hospital", services: ["Oncology", "Neurology", "Urology"] }
+            ],
+            "Jharkhand": [
+                { name: "Medanta, Ranchi", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "RIMS, Ranchi", services: ["Dermatology", "Pediatrics", "General Surgery"] },
+                { name: "Sadar Hospital", services: ["ENT", "Gastroenterology", "Oncology"] }
+            ],
+            "Karnataka": [
+                { name: "Manipal Hospital", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "Fortis Hospital", services: ["Oncology", "General Surgery", "Pediatrics"] },
+                { name: "Columbia Asia Hospital", services: ["Cardiology", "ENT", "Gastroenterology"] },
+                { name: "Narayana Health", services: ["Orthopedics", "Neurology", "Cardiac Surgery"] },
+                { name: "St. John's Medical College", services: ["Urology", "Nephrology", "Oncology"] }
+            ],
+            "Tamil Nadu": [
+                { name: "Apollo Hospital", services: ["Cardiology", "Orthopedics", "Diabetology"] },
+                { name: "MIOT Hospital", services: ["Gastroenterology", "Pediatrics", "Transplant Surgery"] },
+                { name: "Fortis Malar Hospital", services: ["Neurosurgery", "Cardiology", "ENT"] },
+                { name: "SRM Hospital", services: ["Dermatology", "Neurology", "Urology"] },
+                { name: "Government General Hospital", services: ["General Medicine", "Orthopedics", "Cardiology"] }
+            ],
+            "Maharashtra": [
+                { name: "Lilavati Hospital", services: ["Cardiology", "Pediatrics", "Orthopedics"] },
+                { name: "Hiranandani Hospital", services: ["Oncology", "Neurology", "Urology"] },
+                { name: "Breach Candy Hospital", services: ["Cardiology", "Orthopedics", "Dermatology"] },
+                { name: "Kokilaben Dhirubhai Ambani Hospital", services: ["Cardiology", "Neurosciences", "Organ Transplant"] },
+                { name: "Nanavati Hospital", services: ["Oncology", "Gastroenterology", "ENT"] }
+            ],
+            "Delhi": [
+                { name: "AIIMS", services: ["Cardiology", "Orthopedics", "Gastroenterology"] },
+                { name: "Max Super Specialty Hospital", services: ["Neurology", "Organ Transplant", "Oncology"] },
+                { name: "Fortis Escorts Heart Institute", services: ["Cardiology", "Cardiac Surgery", "Pulmonology"] },
+                { name: "BLK Super Specialty Hospital", services: ["Cancer Care", "Bone Marrow Transplant", "Gastroenterology"] },
+                { name: "Indraprastha Apollo Hospital", services: ["Neurosurgery", "Orthopedics", "ENT"] }
+            ],
+            "Karnataka": [
+                { name: "Manipal Hospital", services: ["Cardiology", "Neurology", "Orthopedics"] },
+                { name: "Fortis Hospital", services: ["Oncology", "General Surgery", "Pediatrics"] },
+                { name: "Columbia Asia Hospital", services: ["Cardiology", "ENT", "Gastroenterology"] },
+                { name: "Narayana Health", services: ["Orthopedics", "Neurology", "Cardiac Surgery"] },
+                { name: "St. John's Medical College", services: ["Urology", "Nephrology", "Oncology"] }
+            ],
+            "Rajasthan": [
+                { id: 17, name: "SMS Hospital", services: ["Cardiology", "Gastroenterology", "Pediatrics"] },
+                { id: 18, name: "Manipal Hospital Jaipur", services: ["Neurology", "Orthopedics", "Oncology"] }
+            ],
+            // ...continue adding hospitals and services for all states...
+        };
+
+        function searchHospitals() {
+            const state = document.getElementById('state').value.trim();
+            if (!state) {
+                alert('Please enter a state');
+                return;
+            }
+
+            const hospitals = hospitalData[state];
+            if (!hospitals) {
+                alert('No hospitals found for the specified state');
+                return;
+            }
+
+            const hospitalList = document.getElementById('hospital-list');
+            hospitalList.innerHTML = '';
+            hospitals.forEach(hospital => {
+                hospitalList.innerHTML += `<li>${hospital.name}</li>`;
+            });
+
+            const serviceList = document.getElementById('service-list');
+            serviceList.innerHTML = '';
+            hospitals.forEach(hospital => {
+                hospital.services.forEach(service => {
+                    serviceList.innerHTML += `<li>${service}</li>`;
+                });
+            });
+
+            document.getElementById('hospital-section').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

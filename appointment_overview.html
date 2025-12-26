@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Overview</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Appointment Overview</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Patient ID</th>
+                <th>Doctor ID</th>
+                <th>Hospital ID</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment[0] }}</td>  <!-- Appointment ID -->
+                <td>{{ appointment[1] }}</td>  <!-- Patient ID -->
+                <td>{{ appointment[2] }}</td>  <!-- Doctor ID -->
+                <td>{{ appointment[3] }}</td>  <!-- Hospital ID -->
+                <td>{{ appointment[4] }}</td>  <!-- Appointment Date -->
+                <td>{{ appointment[5] }}</td>  <!-- Status -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

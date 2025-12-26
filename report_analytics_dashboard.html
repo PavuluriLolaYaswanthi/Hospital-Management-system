@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports and Analytics Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        .reports-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .report-box {
+            background-color: #007bff;
+            color: white;
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .report-box:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reports & Analytics Dashboard</h1>
+        <div class="reports-section">
+            <div class="report-box">
+                <a href="#">Patient Statistics</a>
+            </div>
+            <div class="report-box">
+                <a href="#">Appointment Trends</a>
+            </div>
+            <div class="report-box">
+                <a href="#">Hospital Performance</a>
+            </div>
+            <div class="report-box">
+                <a href="#">Resource Allocation</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

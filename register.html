@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Hospital Management System</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            color: #eee;
+            overflow: hidden;
+        }
+
+        /* Background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: rotateBackground 20s linear infinite;
+            z-index: -1;
+        }
+
+        /* Rotation for background */
+        @keyframes rotateBackground {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Container for the registration form */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Animation for the form */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header styling */
+        h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Label styling */
+        label {
+            text-align: left;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Input field styling with glass effect */
+        input[type="text"], input[type="email"], input[type="password"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #eee;
+            outline: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        input:focus {
+            border-color: #00c9ff;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(0, 201, 255, 0.5);
+        }
+
+        /* Register button styling with neon glow effect */
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%);
+            color: #333;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 201, 255, 0.5), 0 0 15px rgba(146, 254, 157, 0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #92fe9d 0%, #00c9ff 100%);
+            box-shadow: 0 0 20px rgba(0, 201, 255, 0.7), 0 0 20px rgba(146, 254, 157, 0.7);
+        }
+
+        /* Dropdown styling */
+        .dropdown-container select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            color: #eee;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            position: absolute;
+            top: 50%; /* Center vertically */
+            right: 10px; /* Position it to the right of the input field */
+            color: #92fe9d;
+            font-size: 1.2rem;
+            transform: translateY(-50%); /* Center icon precisely */
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #00c9ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" action="{{ url_for('main.register') }}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <div class="password-container"> <!-- Added wrapper for the password input -->
+                <input type="password" id="password" name="password" required>
+                <span class="password-toggle" onclick="togglePassword()">👁️</span>
+            </div>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="admin">Admin</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+                <option value="nurse">Nurse</option>
+                <option value="ambulance">Ambulance</option>
+                <option value="medical_store">Medical Store</option>
+                <option value="hospital_manager">Hospital Manager</option>
+            </select>
+
+            <!-- Dropdowns for State and City inside the container -->
+            <div class="dropdown-container">
+                <label for="state">State:</label>
+                <select id="state" required>
+                    <option value="">Select State</option>
+                </select>
+
+                <label for="city">City:</label>
+                <select id="city" required>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        const locationData = {
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Kadapa", "Kurnool", "Nellore", "Tirupati"],
+            "Arunachal Pradesh": ["Itanagar", "Tawang", "Pasighat"],
+            "Assam": ["Guwahati", "Dibrugarh", "Silchar"],
+            "Bihar": ["Patna", "Gaya", "Bhagalpur"],
+            "Chhattisgarh": ["Raipur", "Bilaspur", "Korba"],
+            "Goa": ["Panaji", "Margao", "Vasco da Gama"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+            "Haryana": ["Gurgaon", "Faridabad", "Panchkula"],
+            "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala"],
+            "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad"],
+            "Karnataka": ["Bangalore", "Mysore", "Hubli"],
+            "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
+            "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Manipur": ["Imphal", "Churachandpur", "Thoubal"],
+            "Meghalaya": ["Shillong", "Tura", "Jowai"],
+            "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
+            "Nagaland": ["Kohima", "Dimapur", "Mokokchung"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela"],
+            "Punjab": ["Chandigarh", "Ludhiana", "Amritsar"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur"],
+            "Sikkim": ["Gangtok", "Namchi", "Pelling"],
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Telangana": ["Hyderabad", "Warangal", "Nizamabad"],
+            "Tripura": ["Agartala", "Udaipur", "Dharmanagar"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra"],
+            "Uttarakhand": ["Dehradun", "Haridwar", "Nainital"],
+            "West Bengal": ["Kolkata", "Darjeeling", "Howrah"]
+        };
+
+        window.onload = () => {
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+
+            for (const state in locationData) {
+                stateSelect.innerHTML += `<option value="${state}">${state}</option>`;
+            }
+
+            stateSelect.addEventListener('change', () => {
+                citySelect.innerHTML = '<option value="">Select City</option>';
+                if (locationData[stateSelect.value]) {
+                    locationData[stateSelect.value].forEach(city => {
+                        citySelect.innerHTML += `<option value="${city}">${city}</option>`;
+                    });
+                }
+            });
+        };
+
+        // JavaScript function to toggle password visibility
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.querySelector('.password-toggle');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈'; // Change icon to hide
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️'; // Change icon back to show
+            }
+        }
+    </script>
+</body>
+</html>

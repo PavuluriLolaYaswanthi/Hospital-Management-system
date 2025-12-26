@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Availability</title>
+</head>
+<body>
+    <h1>Edit Availability</h1>
+    <form method="POST">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="{{ availability[2] }}" required><br>
+
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" value="{{ availability[3] }}" required><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Available" {% if availability[4] == 'Available' %} selected {% endif %}>Available</option>
+            <option value="Unavailable" {% if availability[4] == 'Unavailable' %} selected {% endif %}>Unavailable</option>
+        </select><br>
+
+        <input type="submit" value="Update Availability">
+    </form>
+</body>
+</html>

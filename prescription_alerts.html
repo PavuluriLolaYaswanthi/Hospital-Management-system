@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Alerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Prescription Alerts</h1>
+
+    {% if alerts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Alert ID</th>
+                    <th>Prescription ID</th>
+                    <th>Alert Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in alerts %}
+                <tr>
+                    <td>{{ alert[0] }}</td>
+                    <td>{{ alert[1] }}</td>
+                    <td>{{ alert[2] }}</td>
+                    <td>{{ alert[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No prescription alerts available.</p>
+    {% endif %}
+</body>
+</html>

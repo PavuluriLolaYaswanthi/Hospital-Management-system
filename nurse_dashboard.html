@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurse/Staff Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .dashboard-section {
+            background: #f7f9fc;
+            flex: 0 0 calc(33.33% - 20px);
+            margin: 10px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .dashboard-section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-container {
+            font-size: 3rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-section {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-section {
+                flex: 0 0 calc(100% - 20px);
+            }
+        }
+    </style>
+    <!-- Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-section">
+            <div class="icon-container"><i class="fas fa-user-nurse"></i></div>
+            <h2>Patient Management</h2>
+            <a href="{{ url_for('main.manage_patients') }}">Manage Patients</a>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="icon-container"><i class="fas fa-tasks"></i></div>
+            <h2>Task Management</h2>
+            <a href="{{ url_for('main.manage_tasks') }}">Manage Tasks</a>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="icon-container"><i class="fas fa-calendar-alt"></i></div>
+            <h2>Shift Scheduling</h2>
+            <a href="{{ url_for('main.shift_scheduling') }}">Manage Shifts</a>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="icon-container"><i class="fas fa-heartbeat"></i></div>
+            <h2>Patient Monitoring</h2>
+            <a href="{{ url_for('main.patient_monitoring') }}">Monitor Patients</a>
+        </div>
+
+        <div class="dashboard-section">
+            <div class="icon-container"><i class="fas fa-box"></i></div>
+            <h2>Resource Requests</h2>
+            <a href="{{ url_for('main.request_resource') }}">Request Resource</a>
+        </div>
+    </div>
+</body>
+
+</html>

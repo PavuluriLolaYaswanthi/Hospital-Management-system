@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Username - Hospital Management System</title>
+</head>
+<body>
+    <h1>Forgot Username</h1>
+    <form method="POST" action="{{ url_for('main.forgot_username') }}">
+        <input type="email" name="email" placeholder="Enter your registered email" required>
+        <button type="submit">Retrieve Username</button>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Notifications</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>System Notifications</h1>
+    
+    <div class="notification-list">
+        {% if notifications %}
+            <ul>
+                {% for notification in notifications %}
+                    <li>{{ notification.message }} - {{ notification.timestamp }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No notifications available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
